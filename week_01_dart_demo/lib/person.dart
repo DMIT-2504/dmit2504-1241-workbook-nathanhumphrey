@@ -16,6 +16,7 @@ class Person {
     if (value.trim().isEmpty) {
       throw Exception('Name cannot be empty');
     }
+    _name = value;
   }
 
   /// The age for the person
