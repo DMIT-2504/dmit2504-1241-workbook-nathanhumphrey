@@ -4,8 +4,7 @@ class Person {
 
   Person(String name, int age) {
     this.name = name;
-    // TODO: use the age property
-    _age = age;
+    this.age = age;
   }
 
   /// The name of the person
@@ -19,5 +18,16 @@ class Person {
     }
   }
 
-  // TODO: create a set and get for age (age cannot be less than zero)
+  /// The age for the person
+  int get age {
+    return _age;
+  }
+
+  set age(int value) {
+    if (value < 0) {
+      throw Exception('Age must be greater than or equal to zero');
+    }
+
+    _age = value;
+  }
 }

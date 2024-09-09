@@ -9,6 +9,18 @@ String prompt(String message) {
   return stdin.readLineSync()!;
 }
 
-// TODO: create a function that will prompt the user for 
-// an int value. Keep displaying the prompt until a valid
-// int is entered (HINT: try/catch)
+/// Returns an [int]
+///
+/// Will continue to prompt the user until a valid [int] is entered.
+/// Displayst the [message] as the prompt for the user.
+int promptInt(String message) {
+  bool isValid = false;
+
+  while (!isValid) {
+    try {
+      return int.parse(prompt(message));
+    } catch (e) {
+      stdout.writeln('Invalid input. Please enter a whole number.');
+    }
+  }
+}
