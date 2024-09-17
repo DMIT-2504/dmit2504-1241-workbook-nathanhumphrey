@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:week_02_profile_demo/widgets/page_heading.dart';
+import 'package:week_02_profile_demo/widgets/profile_detail.dart';
+import 'package:week_02_profile_demo/widgets/profile_image.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,65 +17,13 @@ class MainApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Simple Flutter Demo'),
         ),
-        body: Column(
+        body: const Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'Employee Profile',
-                style: TextStyle(
-                  fontSize: 36.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            ClipOval(
-              child: Image.asset(
-                'assets/images/me.jpg',
-                width: 250.0,
-                height: 250.0,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Name: ',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'Nathan',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Position: ',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'Instructor',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ],
-              ),
-            )
+            PageHeading(title: 'Employee Profile'),
+            ProfileImage(imagePath: 'assets/images/me.jpg'),
+            ProfileDetail(label: 'Name', value: 'Nathan'),
+            ProfileDetail(label: 'Position', value: 'Instructor'),
+            ProfileDetail(label: 'Reports to', value: 'Steve'),
           ],
         ),
       ),
