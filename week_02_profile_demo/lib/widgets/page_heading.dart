@@ -11,6 +11,7 @@ class PageHeading extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
+          fontFamily: 'Lobster',
           fontSize: 36.0,
           fontWeight: FontWeight.bold,
         ),

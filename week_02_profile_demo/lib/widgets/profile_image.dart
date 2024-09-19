@@ -7,12 +7,27 @@ class ProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: Image.asset(
-        imagePath,
-        width: 250.0,
-        height: 250.0,
+    return Container(
+      width: 250.0,
+      height: 250.0,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.cover,
+        ),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary,
+          width: 4.0,
+        ),
       ),
     );
+    // return ClipOval(
+    //   child: Image.asset(
+    //     imagePath,
+    //     width: 250.0,
+    //     height: 250.0,
+    //   ),
+    // );
   }
 }
