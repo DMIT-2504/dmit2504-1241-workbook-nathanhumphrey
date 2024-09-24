@@ -3,10 +3,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-class RandomDog extends StatelessWidget {
+class RandomDog extends StatefulWidget {
   const RandomDog({super.key});
 
+  @override
+  State<RandomDog> createState() => _RandomDogState();
+}
+
+class _RandomDogState extends State<RandomDog> {
   static const dogUrl = 'https://dog.ceo/api/breeds/image/random';
+
+  var imageUrl = '';
 
   static Future<String> getDogImage() async {
     final url = Uri.parse(dogUrl);
@@ -14,16 +21,30 @@ class RandomDog extends StatelessWidget {
     return jsonDecode(response.body)['message'];
   }
 
-  // TODO: use the getDogImage function
+  @override
+  void initState() {
+    getDogImage().then((url) {
+      setState(() {
+        imageUrl = url;
+      });
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.network(
-            'https://images.dog.ceo/breeds/terrier-lakeland/n02095570_1068.jpg'),
+        imageUrl != '' ? Image.network(imageUrl) : const Text('Loading Image'),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            getDogImage().then((url) {
+              setState(() {
+                imageUrl = url;
+              });
+            });
+          },
           child: const Text('Get Image'),
         ),
       ],
