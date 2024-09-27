@@ -16,33 +16,42 @@ class MainApp extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const Text(
-                'New User Form',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+          child: Form(
+            child: Column(
+              children: [
+                const Text(
+                  'New User Form',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                  label: Text('Username'),
+                // Username cannot be empty
+                TextFormField(
+                  validator: (value) => value == null || value.trim() == ''
+                      ? 'Username cannot be empty'
+                      : null,
+                  decoration: const InputDecoration(
+                    label: Text('Username'),
+                  ),
                 ),
-              ),
-              const TextField(
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  label: Text('Password'),
+                TextFormField(
+                  validator: (value) => value == null || value.trim() == ''
+                      ? 'Password cannot be empty'
+                      : null,
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  decoration: const InputDecoration(
+                    label: Text('Password'),
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text('Sign Up'),
-              ),
-            ],
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Sign Up'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
