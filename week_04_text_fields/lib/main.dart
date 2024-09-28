@@ -32,6 +32,15 @@ class UserSignUpForm extends StatefulWidget {
 
 class _UserSignUpFormState extends State<UserSignUpForm> {
   final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +57,7 @@ class _UserSignUpFormState extends State<UserSignUpForm> {
           ),
           // Username cannot be empty
           TextFormField(
+            controller: _usernameController,
             validator: (value) => value == null || value.trim() == ''
                 ? 'Username cannot be empty'
                 : null,
@@ -56,6 +66,7 @@ class _UserSignUpFormState extends State<UserSignUpForm> {
             ),
           ),
           TextFormField(
+            controller: _passwordController,
             validator: (value) => value == null || value.trim() == ''
                 ? 'Password cannot be empty'
                 : null,
@@ -70,8 +81,9 @@ class _UserSignUpFormState extends State<UserSignUpForm> {
             onPressed: () {
               // test validation on fields
               if (_formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('Processing signup'),
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(
+                      'Username: ${_usernameController.text}; Password: ${_passwordController.text}'),
                 ));
               }
             },
