@@ -1,10 +1,10 @@
 name: week_04_text_fields
-description: "A new Flutter project."
+description: 'A new Flutter project.'
 publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^3.5.3
+  sdk: ^3.5.2
 
 dependencies:
   flutter:
