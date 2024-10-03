@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PageOne extends StatelessWidget {
-  const PageOne({super.key});
+  PageOne({required this.message, super.key});
+
+  String message;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +17,13 @@ class PageOne extends StatelessWidget {
         ),
         title: const Text('Navigation Page One'),
       ),
-      body: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pop<String>('From page one');
-        },
-        child: const Text('On Page One'),
-      ),
+      // body: ElevatedButton(
+      //   onPressed: () {
+      //     Navigator.of(context).pop<String>('From page one');
+      //   },
+      //   child: const Text('On Page One'),
+      // ),
+      body: Text('The message $message'),
     );
   }
 }

@@ -28,7 +28,10 @@ class _HomeState extends State<Home> {
                 //     builder: (context) => const PageOne(),
                 //   ),
                 // );
-                var value = await Navigator.of(context).pushNamed('/page_one');
+                var value = await Navigator.of(context).pushNamed(
+                  '/page_one',
+                  arguments: 'A special message',
+                );
 
                 setState(() {
                   returnValue = value as String;

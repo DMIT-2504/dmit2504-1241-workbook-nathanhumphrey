@@ -14,11 +14,31 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: '/',
-      routes: {
-        '/': (context) => const Home(),
-        '/page_one': (context) => const PageOne(),
-        '/page_two': (context) => const PageTwo(),
+      onGenerateRoute: (settings) {
+        MaterialPageRoute? page;
+
+        switch (settings.name) {
+          case '/':
+            page = MaterialPageRoute(builder: (context) => const Home());
+            break;
+          case '/page_one':
+            String messageValue = settings.arguments as String;
+            page = MaterialPageRoute(
+              builder: (context) => PageOne(message: messageValue),
+            );
+            break;
+          case '/page_two':
+            page = MaterialPageRoute(builder: (context) => const PageTwo());
+            break;
+        }
+
+        return page;
       },
+      // routes: {
+      //   '/': (context) => const Home(),
+      //   '/page_one': (context) => const PageOne(),
+      //   '/page_two': (context) => const PageTwo(),
+      // },
       //home: Home(),
     );
   }
