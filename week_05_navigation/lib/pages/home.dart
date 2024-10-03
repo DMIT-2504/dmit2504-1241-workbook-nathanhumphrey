@@ -23,24 +23,27 @@ class _HomeState extends State<Home> {
           children: [
             ElevatedButton(
               onPressed: () async {
-                String value = await Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PageOne(),
-                  ),
-                );
+                // String value = await Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => const PageOne(),
+                //   ),
+                // );
+                var value = await Navigator.of(context).pushNamed('/page_one');
+
                 setState(() {
-                  returnValue = value;
+                  returnValue = value as String;
                 });
               },
               child: const Text('Page 1'),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PageTwo(),
-                  ),
-                );
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => const PageTwo(),
+                //   ),
+                // );
+                Navigator.of(context).pushNamed('/page_two');
               },
               child: const Text('Page 2'),
             ),

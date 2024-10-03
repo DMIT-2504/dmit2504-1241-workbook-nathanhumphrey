@@ -7,6 +7,12 @@ class PageOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop<String>('Default From page one');
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
         title: const Text('Navigation Page One'),
       ),
       body: ElevatedButton(
