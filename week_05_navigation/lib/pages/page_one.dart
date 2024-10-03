@@ -11,7 +11,7 @@ class PageOne extends StatelessWidget {
       ),
       body: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop<String>('From page one');
         },
         child: const Text('On Page One'),
       ),
