@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:week_05_navigation/pages/page_one.dart';
-import 'package:week_05_navigation/pages/page_two.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

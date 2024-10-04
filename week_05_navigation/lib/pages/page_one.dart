@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PageOne extends StatelessWidget {
-  PageOne({required this.message, super.key});
+  const PageOne({required this.message, super.key});
 
-  String message;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
