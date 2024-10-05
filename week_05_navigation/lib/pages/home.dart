@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:week_05_navigation/routes.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,7 +19,7 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('sub');
+          Navigator.of(context).pushNamed(subRoute);
         },
         child: const Icon(Icons.navigation),
       ),
@@ -33,7 +34,7 @@ class _HomeState extends State<Home> {
                 //   ),
                 // );
                 var value = await Navigator.of(context).pushNamed(
-                  '/page_one',
+                  page1Route,
                   arguments: 'A special message',
                 );
 
@@ -50,7 +51,7 @@ class _HomeState extends State<Home> {
                 //     builder: (context) => const PageTwo(),
                 //   ),
                 // );
-                Navigator.of(context).pushNamed('/page_two');
+                Navigator.of(context).pushNamed(page2Route);
               },
               child: const Text('Page 2'),
             ),

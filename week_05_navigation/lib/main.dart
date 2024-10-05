@@ -4,6 +4,7 @@ import 'package:week_05_navigation/pages/page_one.dart';
 import 'package:week_05_navigation/pages/page_two.dart';
 import 'package:week_05_navigation/pages/sub_pages/sub.dart';
 import 'package:week_05_navigation/pages/sub_pages/sub_manager.dart';
+import 'package:week_05_navigation/routes.dart';
 
 void main() {
   runApp(const MainApp());
@@ -20,22 +21,22 @@ class MainApp extends StatelessWidget {
         MaterialPageRoute? page;
 
         switch (settings.name) {
-          case '/':
+          case homeRoute:
             page = MaterialPageRoute(builder: (context) => const Home());
             break;
-          case '/page_one':
+          case page1Route:
             String messageValue = settings.arguments as String;
             page = MaterialPageRoute(
               builder: (context) => PageOne(message: messageValue),
             );
             break;
-          case '/page_two':
+          case page2Route:
             page = MaterialPageRoute(builder: (context) => const PageTwo());
             break;
-          case 'sub':
+          case subRoute:
             page = MaterialPageRoute(
               builder: (context) => const SubManager(
-                subPageRoute: 'sub',
+                subPageRoute: subRoute,
               ),
             );
         }
