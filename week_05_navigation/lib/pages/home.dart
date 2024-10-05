@@ -16,6 +16,12 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text('Navigation Demo'),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed('sub');
+        },
+        child: const Icon(Icons.navigation),
+      ),
       body: Center(
         child: Column(
           children: [
