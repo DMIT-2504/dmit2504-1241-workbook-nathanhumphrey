@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
           await _controller
               .insert(Todo(description: 'Todo $_counter', done: false));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

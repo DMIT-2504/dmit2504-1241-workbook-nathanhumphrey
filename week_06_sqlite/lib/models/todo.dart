@@ -8,7 +8,7 @@ class Todo {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'descripiton': description,
+      'description': description,
       'done': done ? 1 : 0,
     };
   }
