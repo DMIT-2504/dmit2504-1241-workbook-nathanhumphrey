@@ -21,17 +21,22 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  _initState() async {
+  Future<void> _initState() async {
     _controller = TodoController.getInstance(await getDatabase());
     _fetchTodos();
   }
 
-  _fetchTodos() async {
+  Future<void> _fetchTodos() async {
     final todos = await _controller.getTodos();
     setState(() {
       _todos = todos;
       _counter = _todos.length;
     });
+  }
+
+  Future<void> _addTodo(Todo todo) async {
+    await _controller.insert(todo);
+    _fetchTodos();
   }
 
   @override
@@ -51,25 +56,41 @@ class _HomeState extends State<Home> {
                       itemCount: _todos.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          title: Text(_todos[index].description),
+                          title: Text(
+                            _todos[index].description,
+                            style: TextStyle(
+                                decoration: _todos[index].done
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none),
+                          ),
                           trailing: Checkbox(
                             value: _todos[index].done,
                             onChanged: (value) async {
-                              _todos[index].done = value!;
-                              _controller.update(_todos[index]);
+                              setState(() {
+                                _todos[index].done = value!;
+                                _controller.update(_todos[index]);
+                              });
                             },
                           ),
                         );
                       },
                     ),
                   ),
+            if (_todos.isNotEmpty)
+              ElevatedButton(
+                onPressed: () async {
+                  await _controller.deleteAll();
+                  _fetchTodos();
+                },
+                child: const Text('Delete All'),
+              ),
+            const SizedBox(height: 96.0),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await _controller
-              .insert(Todo(description: 'Todo $_counter', done: false));
+          await _addTodo(Todo(description: 'Todo $_counter', done: false));
         },
         child: const Icon(Icons.add),
       ),
