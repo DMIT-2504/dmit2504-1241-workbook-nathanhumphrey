@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:week_05_navigation/pages/home.dart';
 import 'package:week_05_navigation/pages/page_one.dart';
 import 'package:week_05_navigation/pages/page_two.dart';
-import 'package:week_05_navigation/pages/sub_pages/sub.dart';
 import 'package:week_05_navigation/pages/sub_pages/sub_manager.dart';
 import 'package:week_05_navigation/routes.dart';
 
