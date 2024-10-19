@@ -32,7 +32,7 @@ class MainApp extends StatelessWidget {
             actions: [
               AuthStateChangeAction<SignedIn>((context, state) {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed('/');
+                // Navigator.of(context).pushReplacementNamed('/');
               }),
             ],
           );
@@ -42,7 +42,7 @@ class MainApp extends StatelessWidget {
             actions: [
               SignedOutAction((context) {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed('/');
+                // Navigator.of(context).pushReplacementNamed('/');
               }),
             ],
           );
