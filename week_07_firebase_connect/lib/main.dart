@@ -1,26 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:week_07_firebase_connect/app_state.dart';
+import 'package:week_07_firebase_connect/pages/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+
+  ApplicationState appState = ApplicationState();
+
+  runApp(
+    MainApp(
+      appState: appState,
+    ),
   );
-  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({required this.appState, super.key});
+
+  final ApplicationState appState;
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      routes: {
+        '/': (context) {
+          return HomePage(appState: appState);
+        },
+        '/sign-in': (context) {
+          return SignInScreen(
+            actions: [
+              AuthStateChangeAction<SignedIn>((context, state) {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed('/');
+              }),
+            ],
+          );
+        },
+        '/profile': (context) {
+          return ProfileScreen(
+            actions: [
+              SignedOutAction((context) {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed('/');
+              }),
+            ],
+          );
+        },
+      },
     );
   }
 }
