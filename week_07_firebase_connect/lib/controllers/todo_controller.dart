@@ -15,7 +15,8 @@ class TodoController {
     // }
 
     // _instance ??= TodoController._internal(db);
-    // Always want the current user
+
+    // Always want an updated instance to track current user
     if (_instance != null) {
       _instance = null;
     }
@@ -30,35 +31,62 @@ class TodoController {
     _user = FirebaseAuth.instance.currentUser;
   }
 
-  Future<void> insert(Todo todo) async {
+  Future<List<Todo>> getTodos() async {
     if (_user == null) {
-      throw StateError('Cannot insert for null user');
+      throw StateError('Cannot fetch todos when a user is null');
     }
 
-    final doc =
-        await _db?.collection('/todos/${_user!.uid}/todos').add(todo.toMap());
-    todo.id = doc?.id;
+    final snapshot = await _db?.collection('/todos/${_user!.uid}/todos').get();
+
+    final todos = snapshot?.docs.map((doc) {
+      return Todo(
+        id: doc.id,
+        description: doc['description'],
+        done: doc['done'] == 1,
+      );
+    }).toList();
+
+    return todos ?? [];
+  }
+
+  Future<void> insert(Todo todo) async {
+    if (_user == null) {
+      throw StateError('Cannot add a todo when the user is null');
+    }
+
+    await _db
+        ?.collection('/todos/${_user!.uid}/todos')
+        .add(todo.toMap())
+        .then((DocumentReference doc) {
+      todo.id = doc.id;
+    });
   }
 
   Future<void> update(Todo todo) async {
-    // await _db!
-    //     .update(tableName, todo.toMap(), where: 'id = ?', whereArgs: [todo.id]);
+    if (_user == null) {
+      throw StateError('Cannot update a todo when the user is null');
+    }
+
+    await _db
+        ?.collection('/todos/${_user!.uid}/todos')
+        .doc(todo.id)
+        .update(todo.toMap());
+  }
+
+  Future<void> deleteTodo(Todo todo) async {
+    if (_user == null) {
+      throw StateError('Cannot update a todo when the user is null');
+    }
+
+    await _db?.collection('/todos/${_user!.uid}/todos').doc(todo.id).delete();
   }
 
   Future<void> deleteAll() async {
-    // await _db!.delete(tableName);
-  }
+    // Must iterate over all todos and individually delete, not ideal
+    final snapshot = await _db?.collection('/todos/${_user!.uid}/todos').get();
 
-  Future<List<Todo>> getTodos() async {
-    // final List<Map<String, dynamic>> maps = await _db!.query(tableName);
-
-    // return List.generate(maps.length, (i) {
-    //   return Todo(
-    //     id: maps[i]['id'],
-    //     description: maps[i]['description'],
-    //     done: maps[i]['done'] == 1,
-    //   );
-    // });
-    return [];
+    snapshot?.docs.forEach((doc) async {
+      await _db?.collection('/todos/${_user!.uid}/todos').doc(doc.id).delete();
+    });
   }
 }
