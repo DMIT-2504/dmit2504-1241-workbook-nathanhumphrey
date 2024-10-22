@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:week_07_firebase_connect/app_state.dart';
 import 'package:week_07_firebase_connect/pages/home.dart';
+import 'package:week_07_firebase_connect/pages/todos.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,9 @@ class MainApp extends StatelessWidget {
       routes: {
         '/': (context) {
           return HomePage(appState: appState);
+        },
+        '/todos': (context) {
+          return const TodosPage();
         },
         '/sign-in': (context) {
           return SignInScreen(
