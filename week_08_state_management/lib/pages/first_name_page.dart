@@ -18,14 +18,19 @@ class FirstNamePage extends StatelessWidget {
             const SizedBox(
               height: 24.0,
             ),
-            Text('User name: ${user.firstName} ${user.lastName}'),
+            ListenableBuilder(
+              listenable: user,
+              builder: (context, child) {
+                return Text('User name: ${user.firstName} ${user.lastName}');
+              },
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         // Update our user firs name here
         onPressed: () {
-          //noop;
+          user.firstName = 'NewFirstName';
         },
         child: const Icon(Icons.update),
       ),
