@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:week_08_state_management/models/user.dart';
 
+// This is no longer used, left for posterity
 class UserNotifier extends InheritedNotifier<User> {
   const UserNotifier({
     required User user,

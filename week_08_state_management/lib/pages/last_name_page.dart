@@ -7,6 +7,7 @@ class LastNamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: update this widget to make use of the provider
     final User user = UserNotifier.of(context);
 
     return Scaffold(
