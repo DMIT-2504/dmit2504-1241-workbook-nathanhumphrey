@@ -18,12 +18,9 @@ class FirstNamePage extends StatelessWidget {
               const SizedBox(
                 height: 24.0,
               ),
-              ListenableBuilder(
-                listenable: user,
-                builder: (context, child) {
-                  return Text('User name: ${user.firstName} ${user.lastName}');
-                },
-              ),
+              // No longer require the ListenableBuilder, the Consumser takes care
+              // of rendering updates to the ChangeNotifier
+              Text('User name: ${user.firstName} ${user.lastName}')
             ],
           ),
         ),
