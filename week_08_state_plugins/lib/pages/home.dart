@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:week_08_state_plugins/pages/user_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const Text('Bloc Page'),
+                    builder: (context) => const UserBlocPage(),
                   ),
                 );
               },
