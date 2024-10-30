@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class TransformPage extends StatelessWidget {
@@ -9,11 +10,20 @@ class TransformPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Transform Page'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Transformed Text'),
+            Transform.scale(
+              scale: 2.0,
+              child: Transform.translate(
+                offset: const Offset(0.0, 64.0),
+                child: Transform.rotate(
+                  angle: -30 * (math.pi / 180),
+                  child: const Text('Transformed Text'),
+                ),
+              ),
+            ),
           ],
         ),
       ),
