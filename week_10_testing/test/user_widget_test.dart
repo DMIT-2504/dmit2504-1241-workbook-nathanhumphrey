@@ -24,5 +24,11 @@ void main() {
 
     expect(nameFinder, findsOneWidget);
     expect(emailFinder, findsOneWidget);
+
+    // Testing of widget properties
+    expect(
+        tester.widget(find.text('Name: Jane')),
+        isA<Text>().having(
+            (t) => t.style!.fontWeight, 'Font Weight Bold', FontWeight.bold));
   });
 }
