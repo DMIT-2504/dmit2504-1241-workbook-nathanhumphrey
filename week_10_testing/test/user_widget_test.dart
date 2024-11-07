@@ -21,6 +21,16 @@ void main() {
     await tester.pumpWidget(app);
     final nameFinder = find.text('Name: Jane');
     final emailFinder = find.text('Email: jane@example.com');
+    final buttonFinder = find.byType(ElevatedButton);
+
+    expect(nameFinder, findsNothing);
+    expect(emailFinder, findsNothing);
+
+    // tap the button
+    await tester.tap(buttonFinder);
+
+    // pump the app
+    await tester.pump(const Duration(seconds: 1));
 
     expect(nameFinder, findsOneWidget);
     expect(emailFinder, findsOneWidget);
